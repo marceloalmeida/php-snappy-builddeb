@@ -1,4 +1,4 @@
-# Buildtask for Snappy r for PHP
+# Buildtask for Snappy for PHP
 
 Task to build Debian packages of Snappy for PHP.
 
