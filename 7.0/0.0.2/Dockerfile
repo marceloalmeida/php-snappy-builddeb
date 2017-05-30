@@ -38,7 +38,7 @@ RUN wget -q https://github.com/marcelosousaalmeida/php-snappy/archive/master.zip
   checkinstall --install=no --pkgname='php7.0-snappy' --pkgversion='$VERSION-aig' --pkggroup='php' --pkgsource='http://github.com/goatherd/php-snappy' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.0-common \(\>= 7.0.7\), libsnappy1 \(\>= 1.1.2\)' --include=include_etc
 
 # PERFORM TEST
-RUN cd php-snappy-master ;\
+RUN cd /root/php-ext-snappy ;\
   make && make test
 
 VOLUME ["/pkg"]
