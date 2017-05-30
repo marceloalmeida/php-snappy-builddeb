@@ -1,0 +1,6 @@
+Snappy was developed to reduce network traffic with neglectable overhead on the node.
+ It is therefor quiet fast (to decompress) with a reasonable compression ratio. The developer states [2-4x for HTML data](http://code.google.com/p/snappy/source/browse/trunk/README) for example.
+ Note that snappy is optimised for 64bit architectures and speed benchmarks are usally supplied for that.
+ At the time of writing no streaming service is known to use snappy on the fly.
+ With PHP it is possible to couple snappy with memcached services. But beware of the decompression times on serialised php data.
+ Combined with [igbinary](http://pecl.php.net/package/igbinary) it seems to provide acceptable performance and compression ratio.
