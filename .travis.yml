@@ -16,7 +16,7 @@ before_script:
 script:
   - docker build -t "$image" .
   - ~/official-images/test/run.sh "$image"
-  - docker run -it --rm -v $(pwd)/pkg:/pkg $image bash -c "cp /root/php-snappy-*/*.deb /pkg; chmod 777 /pkg -R"
+  - docker run -it --rm -v $(pwd)/pkg:/pkg $image bash -c "cp /root/php-ext-snappy/*.deb /pkg; chmod 777 /pkg -R"
   - deb_package=$(ls $(pwd)/pkg)
   - ls -lh $(pwd)/pkg/${deb_package}
 
