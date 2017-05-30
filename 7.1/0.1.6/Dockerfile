@@ -36,7 +36,7 @@ RUN git clone --recursive --depth=1 https://github.com/kjdev/php-ext-snappy.git 
   checkinstall --install=no --pkgname='php7.1-snappy' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='https://github.com/kjdev/php-ext-snappy' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.1-common \(\>= 7.1.5\), libsnappy1 \(\>= 1.1.2\)' --include=include_etc
 
 # PERFORM TEST
-RUN cd php-snappy-master ;\
+RUN cd php-ext-snappy ;\
   make && make test
 
 VOLUME ["/pkg"]
