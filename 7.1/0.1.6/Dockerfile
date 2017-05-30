@@ -27,12 +27,12 @@ RUN mkdir /pkg
 RUN apt-get install -y libsnappy-dev
 
 # CREATE PACKAGE
-RUN git clone --recursive --depth=1 https://github.com/kjdev/php-ext-snappy.git ;\
-  cd php-ext-snappy ;\
-  git checkout tags/$VERSION
-  cp -r /src/* /root/php-ext-snappy/. ;\
-  phpize ;\
-  ./configure ;\
+RUN git clone --recursive --depth=1 https://github.com/kjdev/php-ext-snappy.git && \
+  cd php-ext-snappy && \
+  git checkout tags/$VERSION && \
+  cp -r /src/* /root/php-ext-snappy/. && \
+  phpize && \
+  ./configure && \
   checkinstall --install=no --pkgname='php7.1-snappy' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='https://github.com/kjdev/php-ext-snappy' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.1-common \(\>= 7.1.5\), libsnappy1 \(\>= 1.1.2\)' --include=include_etc
 
 # PERFORM TEST
