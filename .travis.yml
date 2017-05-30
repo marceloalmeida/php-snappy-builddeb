@@ -1,0 +1,31 @@
+language: bash
+services: docker
+
+env:
+  - VERSION=7.0/0.0.2
+  - VERSION=7.1/0.1.6
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+before_script:
+  - env | sort
+  - test latest = "$VERSION" || cd "$VERSION"
+  - image="marceloalmeida/php-snappy-builddeb:${VERSION/\//_}}"
+
+script:
+  - docker build -t "$image" .
+  - ~/official-images/test/run.sh "$image"
+  - docker run -it --rm -v $(pwd)/pkg:/pkg $image bash -c "cp /root/php-snappy-*/*.deb /pkg; chmod 777 /pkg -R"
+  - deb_package=$(ls $(pwd)/pkg)
+  - ls -lh $(pwd)/pkg/${deb_package}
+
+deploy:
+  provider: releases
+  api_key: "${GH_TOKEN}"
+  file: "$(pwd)/pkg/${deb_package}"
+  skip_cleanup: true
+  on:
+    tags: true
+
+# vim:set et ts=2 sw=2:
