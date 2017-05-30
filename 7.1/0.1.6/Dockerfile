@@ -1,4 +1,4 @@
-FROM marceloalmeida/php-docker:latest
+FROM marceloalmeida/php-docker:7.1
 
 MAINTAINER Marcelo Almeida <marcelo.almeida@jumia.com>
 
