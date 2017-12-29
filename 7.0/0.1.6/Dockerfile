@@ -13,13 +13,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   ca-certificates \
   checkinstall \
+  git \
   lsb-release \
   make \
   php7.0-dev \
   re2c \
-  runawk \
-  unzip \
-  wget
+  runawk
 
 COPY src /src
 
@@ -28,14 +27,15 @@ RUN mkdir /pkg
 RUN apt-get install -y libsnappy-dev
 
 # CREATE PACKAGE
-RUN wget -q https://github.com/marcelosousaalmeida/php-snappy/archive/master.zip ;\
-  unzip master.zip ;\
-  mv php-snappy-master php-ext-snappy && \
-  cd php-ext-snappy ;\
-  cp -r /src/* /root/php-ext-snappy/. ;\
-  phpize ;\
-  ./configure ;\
-  checkinstall --install=no --pkgname='php7.0-snappy' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='http://github.com/goatherd/php-snappy' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.0-common \(\>= 7.0.7\), libsnappy1 \(\>= 1.1.2\)' --include=include_etc
+RUN \
+  git clone https://github.com/kjdev/php-ext-snappy.git && \
+  cd php-ext-snappy && \
+  git checkout tags/$VERSION && \
+  git submodule update --init && \
+  cp -r /src/* /root/php-ext-snappy/. && \
+  phpize && \
+  ./configure && \
+  checkinstall --install=no --pkgname='php7.0-snappy' --pkgversion='$VERSION' --pkggroup='php' --pkgsource='https://github.com/kjdev/php-ext-snappy' --maintainer='Marcelo Almeida \<marcelo.almeida@jumia.com\>' --requires='php7.0-common \(\>= 7.0.7\), libsnappy1 \(\>= 1.1.2\)' --include=include_etc
 
 # PERFORM TEST
 RUN cd /root/php-ext-snappy ;\
