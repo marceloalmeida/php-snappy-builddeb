@@ -28,7 +28,7 @@ RUN mkdir /pkg
 RUN apt-get install -y libsnappy-dev
 
 # CREATE PACKAGE
-RUN wget -q https://github.com/marcelosousaalmeida/php-snappy/archive/master.zip ;\
+RUN wget -q https://github.com/marceloalmeida/php-snappy/archive/master.zip ;\
   unzip master.zip ;\
   mv php-snappy-master php-ext-snappy && \
   cd php-ext-snappy ;\
